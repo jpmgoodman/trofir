@@ -24,6 +24,7 @@ request('https://registrar.princeton.edu/course-offerings/search_results.xml?sub
 
   	// do whatever with princeton_courses here; fill database with info
   	// work with express models when the time comes
+  	// (base Models, etc, off the 2d array)
 
   }
   else {
