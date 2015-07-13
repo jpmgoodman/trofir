@@ -3,7 +3,6 @@
 /**
  * Module dependencies.
  */
-/*
 var passport = require('passport');
 
 module.exports = function(app) {
@@ -56,4 +55,3 @@ module.exports = function(app) {
 	// Finish by binding the user middleware
 	app.param('userId', users.userByID);
 };
-*/
