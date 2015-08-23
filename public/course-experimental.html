@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<base href="/">
+
+	<title>ECO 100 | Trofir</title>
+
+	<!-- FAVICON -->
+	<link rel="icon" type="image/png" href="img/logo.png">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/style.css"> <!-- custom styles -->
+
+	<!-- JS -->
+	<script src="libs/jquery/dist/jquery.min.js"></script>
+	<script src="libs/angular/angular.min.js"></script>
+	<script src="libs/angular-route/angular-route.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+
+	<!-- ANGULAR CUSTOM -->
+	<script src="js/controllers/MainCtrl.js"></script>
+	<script src="js/controllers/NerdCtrl.js"></script>
+	<script src="js/services/NerdService.js"></script>
+	<script src="js/controllers/GeekCtrl.js"></script>
+	<script src="js/services/GeekService.js"></script>
+	<script src="js/appRoutes.js"></script>
+	<script src="js/app.js"></script>
+</head>
+<body ng-app="sampleApp" ng-controller="NerdController">
+	<table class="navbar">
+		<td class="logo">
+			<img src="img/logo.png">
+		</td>
+		<td class="course-name">
+			Introduction to Microeconomics - ECO 100
+		</td>
+		<td class="page-select">
+			<i class="fa fa-bars"></i>
+		</td>
+	</table>
+
+	<div class="users-online" style="text-align: center">
+		<ul class="user-list">
+			<li class="user">
+				<div class="user-avatar"><img src="img/user_placeholder.jpg"></div>
+				<div class="user-username" title="jgoodman34oashdfoiasdhf">jgoodman34oashdfoiasdhf</div>
+				<div class="user-status"><i class="fa fa-circle"></i></div>
+			</li>
+			<li class="user">
+				<div class="user-avatar"><img src="img/user_placeholder.jpg"></div>
+				<div class="user-username" title="someuser">someuser</div>
+				<div class="user-status"><i class="fa fa-circle"></i></div>
+			</li>
+			<li class="user">
+				<div class="user-avatar"><img src="img/user_placeholder.jpg"></div>
+				<div class="user-username" title="mgulati">mgulati</div>
+				<div class="user-status"><i class="fa fa-circle"></i></div>
+			</li>
+			<li class="user">
+				<div class="user-avatar"><img src="img/user_placeholder.jpg"></div>
+				<div class="user-username" title="supdawg">supdawg</div>
+				<div class="user-status"><i class="fa fa-circle"></i></div>
+			</li>
+			<li class="user">
+				<div class="user-avatar"><img src="img/user_placeholder.jpg"></div>
+				<div class="user-username" title="anotherguy">anotherguy</div>
+				<div class="user-status"><i class="fa fa-circle"></i></div>
+			</li>
+			<li class="user">
+				<div class="user-avatar"><img src="img/user_placeholder.jpg"></div>
+				<div class="user-username" title="anotherguy">anotherguy</div>
+				<div class="user-status"><i class="fa fa-circle"></i></div>
+			</li>
+			<li class="user">
+				<div class="user-avatar"><img src="img/user_placeholder.jpg"></div>
+				<div class="user-username" title="anotherguy">ill-b-bach</div>
+				<div class="user-status"><i class="fa fa-circle offline"></i></div>
+			</li>
+			<li class="user">
+				<div class="user-avatar"><img src="img/user_placeholder.jpg"></div>
+				<div class="user-username" title="anotherguy">ayyyososoooooo</div>
+				<div class="user-status"><i class="fa fa-circle offline"></i></div>
+			</li>
+			<li class="user">
+				<div class="user-avatar"><img src="img/user_placeholder.jpg"></div>
+				<div class="user-username" title="anotherguy">waddupdoe</div>
+				<div class="user-status"><i class="fa fa-circle offline"></i></div>
+			</li>
+		</ul>
+	</div>
+
+	<div class="chat-box">
+
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="img/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">jgoodman94</div>
+					<div class="time">11:23 PM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score">238</div>
+				</div>
+				<div class="message-text">
+					Here's some text thoasdlfk ahsdlk fahsd   asdofi ahsdo fihasdo fhiasdo fiahsdo fiahsd ofiashdof iahsdf oiasdjf oasdijf oasdif asdoif hasdof ihasdof iahsdofi adhsofi adhsof ahso aosdifh asodif adsoif jasdofi jasdof iahdsof ijadsof ijasdof iadhsio
+				</div>
+			</div>
+		</div>
+
+
+
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="img/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">mgulati482</div>
+					<div class="time">11:25 PM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score">19</div>
+				</div>
+				<div class="message-text">
+					durka durka
+				</div>
+			</div>
+		</div>
+
+
+
+		<form class="message-form" action="">
+			<input type="text" class="send-message" name="send-message" placeholder="Send a message..." autocomplete="off">
+		</form>
+	</div>
+
+	<div class="top-content">
+		Top content
+	</div>
+
+
+
+
+
+	<!-- ANGULAR DYNAMIC CONTENT -->
+	<!-- <div ng-view></div> -->
+
+
+	<script>
+	var socket = io.connect('http://localhost:8080/');
+	socket.on('news', function (data) {
+		console.log(data);
+		socket.emit('my other event', { my: 'data' });
+		console.log('here')
+	});
+	socket.emit('add-user');
+
+
+
+	$('form.message-form').submit(function(e) {
+		e.preventDefault();
+		var date = new Date();
+		var unixTime = date.getTime();
+		var message = $('.message-form > .send-message').val();
+		var msgObj = {
+			content: message,
+			time: unixTime
+		};
+		$('.message-form > .send-message').val('');
+		socket.emit('chat message', msgObj);
+	});
+
+
+
+	socket.on('chat message', function(msgObj){
+		var message = msgObj.content;
+		var time = unixTimeToText(msgObj.time);
+		$('.chat-box').append('\
+		<div class="message clearfix">\
+		<div class="message-avatar">\
+		<img src="img/user_placeholder.jpg">\
+		</div>\
+		<div class="message-content">\
+		<div class="message-header">\
+		<div class="username">user</div>\
+		<div class="time">' + time + '</div>\
+		<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>\
+		<div class="score">0</div>\
+		</div>\
+		<div class="message-text">' + message + '</div>\
+		</div>\
+		</div>\
+		');
+		var $chatBox = $('.chat-box');
+		$chatBox.scrollTop($chatBox[0].scrollHeight);
+	});
+
+
+
+	// converts unix timestamp to text
+	function unixTimeToText(unix_timestamp) {
+		var date = new Date(unix_timestamp);
+		var hours = date.getHours();
+
+		var suffix = "AM";
+		if (hours >= 12) {
+			suffix = "PM";
+			hours -= 12;
+		}
+		if (hours == 0) {
+			hours = 12;
+		}
+
+		var minutes = "0" + date.getMinutes();
+		var formattedTime = hours + ':' + minutes.substr(-2) + " " + suffix;
+
+		return formattedTime;
+	}
+
+	</script>
+</body>
+
+</html>
