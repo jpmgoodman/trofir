@@ -4,7 +4,7 @@ var School = require('../../models/School');
 
 router.route('/')
 
-    // GET request -- works
+    // GET request -- works!
     .get(function(req, res) {
 
         School.find(function(err, schools) {
