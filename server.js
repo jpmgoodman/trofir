@@ -30,7 +30,7 @@ app.use(express.static(__dirname + '/public')); // set the static files location
 
 app.use('/api', require('./app/routes/routes'));
 app.get('/', function(req, res) {
-	res.sendfile('./public/splash.html');
+	res.sendfile('./public/index.html');
 });
 app.get('/trototype', function(req, res) {
 	res.sendfile('./public/course-experimental.html');
