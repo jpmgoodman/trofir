@@ -4,38 +4,33 @@ var School = require('../../models/School');
 
 router.route('/')
 
-    // GET request -- works
     .get(function(req, res) {
 
         School.find(function(err, schools) {
             if (err) res.send(err);
-            res.send(schools);
+            res.status(200).json(schools);
         });
     })
 
-    // POST request -- works
     .post(function(req, res) {
 
         var school = new School();
-
         school.name = req.body.name;
         school.latitude = req.body.latitude;
         school.longitude = req.body.longitude;
 
         school.save(function(err) {
             if (err) res.send(err);
-            res.json({ message: 'School created!' });
+            res.status(201).json({ message: 'School created!' });
         });
     })
 
-    // Fallback -- works
     .all(function(req, res) {
-        res.send('Bad HTTP request: ' + req.originalMethod);
+        res.status(400).send('Bad HTTP request: ' + req.originalMethod);
     });
 
 router.route('/:school_id')
 
-    // GET request -- works
     .get(function(req, res) {
         School.findById(req.params.school_id, function(err, school) {
             if (err) res.send(err);
@@ -43,7 +38,6 @@ router.route('/:school_id')
         });
     })
 
-    // PUT request -- works
     .put(function(req, res) {
         School.findById(req.params.school_id, function(err, school) {
             if (err) res.send(err);
@@ -57,24 +51,22 @@ router.route('/:school_id')
 
             school.save(function(err) {
                 if (err) res.send(err);
-                res.json({ message: school.name + ' updated!' });
+                res.status(200).json({ message: school.name + ' updated!' });
             });
         });
     })
 
-    // DELETE request -- works
     .delete(function(req, res) {
         School.remove({
             _id: req.params.school_id
         }, function(err, school) {
             if (err) res.send(err);
-            res.json({ message: 'Successfully deleted' })
+            res.status(200).json({ message: 'Successfully deleted' })
         });
     })
 
-    // Fallback -- works
     .all(function(req, res) {
-        res.send('Unsupported HTTP request: ' + req.originalMethod);
+        res.status(400).send('Unsupported HTTP request: ' + req.originalMethod);
     });
 
 module.exports = router;
