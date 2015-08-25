@@ -18,6 +18,8 @@ router.route('/')
         course.name = req.body.name;
         course.code = req.body.code;
 
+        if (req.body.distr_area)
+            course.distr_area = req.body.distr_area;
         if (req.body.name_2)
             course.name_2 = req.body.name_2
         if (req.body.description)
@@ -61,6 +63,8 @@ router.route('/:course_id')
 
             if (req.body.name)
                 course.name = req.body.name;
+            if (req.body.distr_area)
+                course.distr_area = req.body.distr_area;
             if (req.body.name_2)
                 course.name_2 = req.body.name_2;
             if (req.body.code)

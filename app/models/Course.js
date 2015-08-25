@@ -11,6 +11,7 @@ var courseSchema = new Schema({
     time_days: { type: String },
     prof: { type: String },
     dept: { type: String },
+    distr_area: { type: String },
     num_enrolled: { type: Number, default: 0 },
     created_at: { type: Date, default: Date.now },
     updated_at: { type: Date, default: Date.now }
