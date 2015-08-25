@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var schoolSchema = new Schema({
-    name: { type: String, required: true },
+    name: { type: String, required: true, unique: true },
     latitude: { type: Number, required: true },
     longitude: { type: Number, required: true },
     created_at: { type: Date, default: Date.now },
