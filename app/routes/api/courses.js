@@ -20,8 +20,8 @@ router.route('/')
 
         if (req.body.distr_area)
             course.distr_area = req.body.distr_area;
-        if (req.body.name_2)
-            course.name_2 = req.body.name_2
+        if (req.body.name_tech)
+            course.name_tech = req.body.name_tech
         if (req.body.description)
             course.description = req.body.description;
         if (req.body.time_hours)
@@ -30,8 +30,8 @@ router.route('/')
             course.time_days = req.body.time_days;
         if (req.body.prof)
             course.prof = req.body.prof;
-        if (req.body.dept)
-            course.dept = req.body.dept;
+        if (req.body.course_sect)
+            course.course_sect = req.body.course_sect;
 
         School.findOne({ name: req.body.school_name }, function(err, school) {
                             if (err) res.send(err);
