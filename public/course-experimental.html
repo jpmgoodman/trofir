@@ -68,7 +68,7 @@
 	<div class="chat-box">
 
 
-		<div class="message-container" ng-repeat="message in allMessages">
+		<div class="existing-messages-container" ng-repeat="message in allMessages">
 			<div class="message clearfix">
 				<div class="message-avatar">
 					<img src="img/user_placeholder.jpg">
@@ -86,6 +86,8 @@
 				</div>
 			</div>
 		</div>
+		<div class="new-messages-container"></div>
+
 
 <!--
 		<div class="message clearfix">
@@ -138,7 +140,7 @@
 	socket.on('chat message', function(msgObj){
 		var message = msgObj.content;
 		var time = unixTimeToText(msgObj.time);
-		$('.chat-box > .message-container').append('\
+		$('.chat-box > .new-messages-container').append('\
 		<div class="message clearfix">\
 		<div class="message-avatar">\
 		<img src="img/user_placeholder.jpg">\
