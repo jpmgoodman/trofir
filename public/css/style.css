@@ -1,6 +1,6 @@
 html, body {
     font-family: sans-serif;
-    background-color: #ECF1F5;
+    background-color: rgba(236,241,245,0.5);
     padding: 0;
     margin: 0;
 }
@@ -66,11 +66,10 @@ ul.user-list > li.user {
     text-align: center;
     background: white;
     height: 50px;
-    border-top: solid #ECF1F5 1px;
+    border-bottom: none;
     border-radius: 1px;
 }
-ul.user-list > li.user:first-child {
-    border-top: none;
+ul.user-list > li {
 }
 .user > div {
     display: inline-block;
@@ -124,8 +123,8 @@ ul.user-list > li.user:first-child {
     background-color: white;
     float: left;
     padding: 10px;
-    border: solid lightgrey 1px;
-    border-radius: 2px;
+    border: solid rgba(236,241,245,1) 1px;
+    border-radius: 3px;
     min-width: 300px;
     max-width: calc(100vw - 590px);
     word-wrap: break-word;
@@ -198,7 +197,7 @@ ul.user-list > li.user:first-child {
     font-size: 1.2em;
     padding: 5px 10px 5px 10px;
     box-sizing: border-box;
-    border: solid lightgrey 2px;
+    border: solid #dfdfdf 2px;
     border-radius: 5px;
 
 	transition:  .25s ease-in-out;

@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<base href="/">
 
-	<title>xxx | Trofir</title>
+	<title>ECO 100 | Trofir</title>
 
 	<!-- FAVICON -->
 	<link rel="icon" type="image/png" href="img/logo.png">
@@ -42,145 +42,130 @@
 
 	<div class="users-online" style="text-align: center">
 		<ul class="user-list" ng-repeat="user in courseUsers">
-
 			<li class="user">
 				<div class="user-avatar"><img src="img/avatar1.jpg"></div>
 				<div class="user-username" title="{{ user.username }}">{{ user.username }}</div>
 				<div class="user-status"><i class="fa fa-circle"></i></div>
 			</li>
+	</ul>
+</div>
+
+<div class="chat-box">
 
 
-
-
-			<!--
-			<li class="user">
-				<div class="user-avatar"><img src="img/user_placeholder.jpg"></div>
-				<div class="user-username" title="jgoodman34oashdfoiasdhf">jgoodman34oashdfoiasdhf</div>
-				<div class="user-status"><i class="fa fa-circle"></i></div>
-			</li> -->
-
-
-
-
-		</ul>
-	</div>
-
-	<div class="chat-box">
-
-
-		<div class="existing-messages-container" ng-repeat="message in allMessages">
-			<div class="message clearfix">
-				<div class="message-avatar">
-					<img src="img/user_placeholder.jpg">
-				</div>
-				<div class="message-content">
-					<div class="message-header">
-						<div class="username">user</div>
-						<div class="time">{{ message.created_at | date:'hh:mma' }}</div>
-						<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
-						<div class="score">{{ message.score }}</div>
-					</div>
-					<div class="message-text">
-						{{ message.content }}
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="new-messages-container"></div>
-
-
-<!--
+	<div class="existing-messages-container" ng-repeat="message in allMessages">
 		<div class="message clearfix">
 			<div class="message-avatar">
 				<img src="img/user_placeholder.jpg">
 			</div>
 			<div class="message-content">
 				<div class="message-header">
-					<div class="username">jgoodman94</div>
-					<div class="time">11:23 PM</div>
+					<div class="username">user</div>
+					<div class="time">{{ message.created_at | date:'hh:mma' }}</div>
 					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
-					<div class="score">238</div>
+					<div class="score">{{ message.score }}</div>
 				</div>
 				<div class="message-text">
-					Here's some text thoasdlfk ahsdlk fahsd
+					{{ message.content }}
 				</div>
 			</div>
-		</div> -->
-
-		<form class="message-form" ng-submit="sendMessage()">
-			<input ng-model="messageData.content" type="text" class="send-message" name="send-message" placeholder="Send a message..." autocomplete="off">
-		</form>
+		</div>
 	</div>
-
-	<div class="top-content">
-		Top content
-	</div>
+	<div class="new-messages-container"></div>
 
 
+	<!--
+	<div class="message clearfix">
+	<div class="message-avatar">
+	<img src="img/user_placeholder.jpg">
+</div>
+<div class="message-content">
+<div class="message-header">
+<div class="username">jgoodman94</div>
+<div class="time">11:23 PM</div>
+<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+<div class="score">238</div>
+</div>
+<div class="message-text">
+Here's some text thoasdlfk ahsdlk fahsd
+</div>
+</div>
+</div> -->
+
+<form class="message-form" ng-submit="sendMessage()">
+	<input ng-model="messageData.content" type="text" class="send-message" name="send-message" placeholder="Send a message..." autocomplete="off">
+</form>
+</div>
+
+<div class="top-content">
+	Top content
+</div>
 
 
 
-	<!-- ANGULAR DYNAMIC CONTENT -->
-	<!-- <div ng-view></div> -->
 
 
-	<script>
-	$(function() {
+<!-- ANGULAR DYNAMIC CONTENT -->
+<!-- <div ng-view></div> -->
 
-	});
 
-	var socket = io.connect('http://trofir.com/');
-	socket.on('news', function (data) {
-		console.log(data);
-		socket.emit('my other event', { my: 'data' });
-		console.log('here')
-	});
-	socket.emit('add-user');
+<script>
+$(function() {
 
-	socket.on('chat message', function(msgObj){
-		var message = msgObj.content;
-		var time = unixTimeToText(msgObj.time);
-		$('.chat-box > .new-messages-container').append('\
-		<div class="message clearfix">\
-		<div class="message-avatar">\
-		<img src="img/user_placeholder.jpg">\
-		</div>\
-		<div class="message-content">\
-		<div class="message-header">\
-		<div class="username">user</div>\
-		<div class="time">' + time + '</div>\
-		<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>\
-		<div class="score">0</div>\
-		</div>\
-		<div class="message-text">' + message + '</div>\
-		</div>\
-		</div>\
-		');
-		var $chatBox = $('.chat-box');
-		$chatBox.scrollTop($chatBox[0].scrollHeight);
-	});
+});
 
-	// converts unix timestamp to text
-	function unixTimeToText(unix_timestamp) {
-		var date = new Date(unix_timestamp);
-		var hours = date.getHours();
+var socket = io.connect('http://trofir.com/');
+socket.on('news', function (data) {
+	console.log(data);
+	socket.emit('my other event', { my: 'data' });
+	console.log('here')
+});
+socket.emit('add-user');
 
-		var suffix = "AM";
-		if (hours >= 12) {
-			suffix = "PM";
-			hours -= 12;
-		}
-		if (hours == 0) {
-			hours = 12;
-		}
+socket.on('chat message', function(msgObj){
+	var message = msgObj.content;
+	var time = unixTimeToText(msgObj.time);
+	$('.chat-box > .new-messages-container').append('\
+	<div class="message clearfix">\
+	<div class="message-avatar">\
+	<img src="img/user_placeholder.jpg">\
+	</div>\
+	<div class="message-content">\
+	<div class="message-header">\
+	<div class="username">user</div>\
+	<div class="time">' + time + '</div>\
+	<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>\
+	<div class="score">0</div>\
+	</div>\
+	<div class="message-text">' + message + '</div>\
+	</div>\
+	</div>\
+	');
+	var $chatBox = $('.chat-box');
+	$chatBox.scrollTop($chatBox[0].scrollHeight);
+});
 
-		var minutes = "0" + date.getMinutes();
-		var formattedTime = hours + ':' + minutes.substr(-2) + " " + suffix;
+// converts unix timestamp to text
+function unixTimeToText(unix_timestamp) {
+	var date = new Date(unix_timestamp);
+	var hours = date.getHours();
 
-		return formattedTime;
+	var suffix = "AM";
+	if (hours >= 12) {
+		suffix = "PM";
+		hours -= 12;
+	}
+	if (hours == 0) {
+		hours = 12;
 	}
 
-	</script>
+	var minutes = "0" + date.getMinutes();
+	var formattedTime = hours + ':' + minutes.substr(-2) + " " + suffix;
+
+	return formattedTime;
+}
+
+</script>
 </body>
 
 </html>
