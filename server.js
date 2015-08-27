@@ -32,7 +32,7 @@ app.use('/api', require('./app/routes/routes'));
 app.get('/', function(req, res) {
 	res.sendfile('./public/index.html');
 });
-app.get('/trototype', function(req, res) {
+app.get('/experiments', function(req, res) {
 	res.sendfile('./public/course-experimental.html');
 });
 app.get('*', function(req,res) {
