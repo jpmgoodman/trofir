@@ -21,9 +21,9 @@ input {
     font-size: 25px;
     color: #085058;
     background-color: white;
-    border-bottom: solid #085058 2px;
+    border-bottom: solid black 1px;
 }
-.navbar td {
+.navbar tr {
 }
 .navbar td.logo, .navbar td.page-select {
     width: 200px;
@@ -60,6 +60,7 @@ ul.user-list {
     list-style-type: none;
     padding: 0;
     margin: 0;
+    border: solid rgba(236,241,245,1) 1px;
 }
 ul.user-list > li.user {
     position: relative;
