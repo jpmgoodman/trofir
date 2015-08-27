@@ -89,6 +89,7 @@ ul.user-list > li.user:first-child {
     overflow: hidden;
     text-align: left;
     padding-left: 5px;
+    white-space: nowrap;
 }
 .user > .user-status {
     line-height: 30px;
@@ -114,10 +115,10 @@ ul.user-list > li.user:first-child {
     position: relative;
     margin-top: 10px;
 }
-.chat-box > .message {
+.chat-box > .message-container > .message {
     width: 100%;
 }
-.chat-box > .message > .message-content {
+.chat-box > .message-container > .message > .message-content {
     background-color: white;
     float: left;
     padding: 10px;
@@ -128,7 +129,7 @@ ul.user-list > li.user:first-child {
     word-wrap: break-word;
 
 }
-.chat-box > .message > .message-content > .message-header {
+.chat-box > .message-container > .message > .message-content > .message-header {
     margin-bottom: 10px;
     color: green;
 }
@@ -148,20 +149,20 @@ ul.user-list > li.user:first-child {
     float: right;
     opacity: 0.7;
 }
-.chat-box > .message > div {
+.chat-box > .message-container > .message > div {
     display: inline-block;
 }
-.chat-box > .message > .message-avatar {
+.chat-box > .message-container > .message > .message-avatar {
     height: 100%;
     float: left;
     margin-right: 10px;
 }
-.chat-box > .message > .message-avatar > img {
+.chat-box > .message-container > .message > .message-avatar > img {
     height: 50px;
     border-radius: 5px;
 }
 
-.chat-box > .message > .message-text {
+.chat-box > .message-container > .message > .message-text {
     float: right;
 }
 

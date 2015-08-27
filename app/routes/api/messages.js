@@ -1,12 +1,25 @@
 var express = require('express');
 var router = express.Router();
+var Message = require('../../models/Message');
 
 router.route('/')
     .get(function(req, res) {
-        res.status(200).send('cute GET request bro');
+
+        Message.find(function(err, messages) {
+            if (err) res.send(err);
+            res.status(200).json(messages);
+        });
+
     })
     .post(function(req, res) {
-        res.status(201).send('cute POST request bro');
+
+        var message = new Message();
+        message.content = req.body.content;
+
+        message.save(function(err) {
+            if (err) res.send(err);
+            res.status(201).json({ message: 'Message created!' })
+        });
     })
     .all(function(req, res) {
         res.status(400).send('Bad HTTP request: ' + req.originalMethod);

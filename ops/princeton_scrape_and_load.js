@@ -2,7 +2,14 @@ var request = require('request');
 var cheerio = require('cheerio');
 var school = "Princeton University"
 
-request('https://registrar.princeton.edu/course-offerings/search_results.xml?submit=Search&term=1162&coursetitle=&instructor=&distr_area=&level=&cat_number=&sort=SYN_PS_PU_ROXEN_SOC_VW.SUBJECT%2C+SYN_PS_PU_ROXEN_SOC_VW.CATALOG_NBR%2CSYN_PS_PU_ROXEN_SOC_VW.CLASS_SECTION%2CSYN_PS_PU_ROXEN_SOC_VW.CLASS_MTG_NBR', function (err, res, html) {
+// currently throws error if no tr left
+
+var allURL = 'https://registrar.princeton.edu/course-offerings/search_results.xml?submit=Search&term=1162&coursetitle=&instructor=&distr_area=&level=&cat_number=&sort=SYN_PS_PU_ROXEN_SOC_VW.SUBJECT%2C+SYN_PS_PU_ROXEN_SOC_VW.CATALOG_NBR%2CSYN_PS_PU_ROXEN_SOC_VW.CLASS_SECTION%2CSYN_PS_PU_ROXEN_SOC_VW.CLASS_MTG_NBR'
+var cosURL = "https://registrar.princeton.edu/course-offerings/search_results.xml?term=1162&subject=COS"
+var astURL = "https://registrar.princeton.edu/course-offerings/search_results.xml?term=1162&subject=AST"
+
+
+request(astURL, function (err, res, html) {
     if (!err && res.statusCode == 200) {
         var princeton_courses = [];
         var $ = cheerio.load(html);
@@ -42,7 +49,6 @@ function getCourseInfo($, $tr) {
         }
         saveToCatalog(course);
         getCourseInfo($, $tr.next('tr'));
-
     });
 }
 

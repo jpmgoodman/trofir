@@ -23,5 +23,4 @@ courseSchema.pre('save', function(done) {
 });
 
 var Course = mongoose.model('Course', courseSchema);
-
 module.exports = Course;
