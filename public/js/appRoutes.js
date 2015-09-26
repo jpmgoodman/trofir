@@ -1,23 +1,19 @@
 angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 
 	$routeProvider
-
-		// home page
 		.when('/', {
-			templateUrl: 'views/home.html',
-			controller: 'MainController'
+			templateUrl: 'views/splash.html'
 		})
-
-		.when('/nerds', {
-			templateUrl: 'views/nerd.html',
-			controller: 'NerdController'
+		.when('/login', {
+			templateUrl: 'views/login.html',
+			controller: 'LoginController'
 		})
+		.when('/princeton/:course_id', {
+			templateUrl: 'views/chatroom2.html',
+			controller: 'ChatroomController'
+		})
+		.otherwise({ redirectTo: '/' });
 
-		.when('/geeks', {
-			templateUrl: 'views/geek.html',
-			controller: 'GeekController'	
-		});
-
-	$locationProvider.html5Mode(true);
+	// $locationProvider.html5Mode(true);
 
 }]);

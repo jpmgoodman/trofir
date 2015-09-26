@@ -19,9 +19,9 @@ router.route('/')
         school.latitude = req.body.latitude;
         school.longitude = req.body.longitude;
 
-        school.save(function(err) {
+        school.save(function(err, school) {
             if (err) res.send(err);
-            res.status(201).json({ message: 'School created!' });
+            res.status(201).json({ message: 'School created!', school: school });
         });
     })
 

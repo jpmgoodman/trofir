@@ -1,0 +1,17 @@
+<div class="message-avatar">
+    <img src="{{ message.user_id.avatar_url }}">
+</div>
+<div class="message-content">
+    <div class="message-header">
+        <div class="username">{{ message.user_id.username }}</div>
+        <div class="time">{{ message.created_at | date:'h:mm a' }}</div>
+    </div>
+    <div class="message-text">
+        {{ message.content }}
+    </div>
+</div>
+
+<div class="upvote">
+    <i class="fa fa-heart"></i>
+    <div class="score">{{ message.score }}</div>
+</div>

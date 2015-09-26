@@ -27,34 +27,39 @@ app.use(express.static(__dirname + '/public')); // set the static files location
 // models ==================================================
 
 // routes ==================================================
-
 app.use('/api', require('./app/routes/routes'));
-app.get('/', function(req, res) {
-	res.sendfile('./public/index.html');
-});
-app.get('/experiments', function(req, res) {
-	res.sendfile('./public/course-experimental.html');
-});
 app.get('*', function(req,res) {
-	res.sendfile('./public/404.html');
+	res.sendfile('./public/index.html');
 });
 
 // socket io stuff ==================================================
 io.on('connection', function (socket) {
-	// user joined chatroom
-	socket.on('add-user', function(socket) {
-		console.log('a user connected to the chatroom')
-	});
-	// user left chatroom
-	socket.on('disconnect', function(socket) {
-		console.log('a user left the chatroom');
+	console.log('new connection');
+
+	socket.on('add-user', function(room) {
+		socket.join(room);
 	});
 
-	// got a chat message
-	socket.on('chat message', function(msgObj){
-		console.log('got message ' + msgObj.content);
-		console.log('at time ' + msgObj.time);
-		io.emit('chat message', msgObj);
+	socket.on('disconnect', function(room) {
+		socket.leave(room);
+	});
+
+	socket.on('chat message', function(msgObj, room){
+		socket.broadcast.to(room).emit('chat message', msgObj); // send to all except sender
+	});
+
+	socket.on('user-typing-start', function(username, userID, room) {
+		socket.broadcast.to(room).emit('user-typing-start', username, userID);
+	});
+
+	socket.on('user-typing-end', function(username, userID, room) {
+		socket.broadcast.to(room).emit('user-typing-end', username, userID);
+	})
+
+	socket.on('remove user', function(room) {
+		console.log('got remove user');
+		socket.leave(room);
+		socket.disconnect();
 	});
 });
 

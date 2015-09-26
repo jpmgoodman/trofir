@@ -1,0 +1,92 @@
+<div class="chatroom-container">
+
+    <div class="navbar">
+        <div class="course-name">
+            {{ course.name }}
+            <i class="fa fa-chevron-down"></i>
+        </div>
+        <div class="logo">
+            <img src="img/logo2.png">
+        </div>
+        <div class="school-name">
+            Princeton
+        </div>
+        <div class="course-selector">
+            <input type="text" class="search-courses" placeholder="Search for courses..." ng-model="courseQuery">
+            <ul class="course-selection-list">
+                <li class="course-option" ng-repeat="courseOption in allCourses | filter:courseQuery | orderBy:'name'">
+                    <a href="/#/princeton/{{ courseOption._id }}" style="display: block; width: 100%; height: 100%; padding: 10px;">
+                        {{ courseOption.name }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="course-users" style="text-align: center">
+        <ul class="user-list online-users">
+            <li class="user" ng-repeat="user in courseUsers.online.slice().reverse()">
+                <div class="user-avatar"><img src="{{ user.avatar_url }}"></div>
+                <div class="user-username" title="{{ user.username }}">{{ user.username }}</div>
+                <div class="user-status"><i class="fa fa-circle"></i></div>
+            </li>
+        </ul>
+        <ul class="user-list offline-users">
+            <li class="user" ng-repeat="user in courseUsers.offline.slice().reverse()">
+                <div class="user-avatar"><img src="{{ user.avatar_url }}"></div>
+                <div class="user-username" title="{{ user.username }}">{{ user.username }}</div>
+                <div class="user-status"><i class="fa fa-circle offline"></i></div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="chat-box" scroll-glue>
+        <!-- element directives are like partials -->
+        <div class="existing-messages-container">
+
+            <!-- turn into message directive  -->
+            <div class="message clearfix" ng-repeat="message in allMessages">
+                <div class="message-avatar">
+                    <img src="{{ message.user_id.avatar_url }}">
+                </div>
+                <div class="message-content">
+                    <div class="message-header">
+                        <div class="username">{{ message.user_id.username }}</div>
+                        <div class="time">{{ message.created_at | date:'h:mm a' }}</div>
+                    </div>
+                    <div class="message-text">
+                        {{ message.content }}
+                    </div>
+                </div>
+
+                <div class="upvote">
+                    <i class="fa fa-heart"></i>
+                    <div class="score">{{ message.score }}</div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="new-messages-container">
+        </div>
+
+        <ul class="users-typing">
+        </ul>
+        <span class="users-typing-suffix">
+            <span class="to-be is"> is</span><span class="to-be are"> are</span> typing...
+        </span>
+
+
+        <form class="message-form" ng-submit="sendMessage()">
+            <input ng-model="messageData.content" type="text" class="send-message" name="send-message" placeholder="Send a message..." autocomplete="off">
+        </form>
+    </div>
+
+    <ul class="top-content">
+        <i class="fa fa-fire" style="font-size: 2em; color: orange;"></i>
+        <li class="top-post" ng-repeat="topPost in topPosts">
+            {{ topPost.content }}
+        </li>
+    </ul>
+
+</div>

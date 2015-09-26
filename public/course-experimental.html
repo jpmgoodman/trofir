@@ -28,17 +28,26 @@
 	<script src="js/app.js"></script>
 </head>
 <body ng-app="trofir" ng-controller="ChatroomController">
-	<table class="navbar">
-		<td class="logo">
+	<div class="navbar">
+		<div class="course-name">
+			Introduction to Microeconomics
+			<i class="fa fa-chevron-down"></i>
+		</div>
+		<div class="logo">
 			<img src="img/logo.png">
-		</td>
-		<td class="course-name">
-			xxx
-		</td>
-		<td class="page-select">
-			<i class="fa fa-bars"></i>
-		</td>
-	</table>
+		</div>
+		<div class="school-name">
+			Princeton
+		</div>
+		<div class="course-selector">
+			<input type="text" class="search-courses" placeholder="Search for courses..." ng-model="courseQuery">
+			<ul class="course-selection-list" ng-repeat="course in allCourses | filter:courseQuery | orderBy:'name'">
+				<li class="course-option">
+					{{ course.name }}
+				</li>
+			</ul>
+		</div>
+	</div>
 
 	<div class="users-online" style="text-align: center">
 		<ul class="user-list" ng-repeat="user in courseUsers">
@@ -47,44 +56,46 @@
 				<div class="user-username" title="{{ user.username }}">{{ user.username }}</div>
 				<div class="user-status"><i class="fa fa-circle"></i></div>
 			</li>
-	</ul>
-</div>
+		</ul>
+	</div>
 
-<div class="chat-box">
+	<div class="chat-box">
 
 
-	<div class="existing-messages-container" ng-repeat="message in allMessages">
-		<div class="message clearfix">
-			<div class="message-avatar">
-				<img src="img/user_placeholder.jpg">
-			</div>
-			<div class="message-content">
-				<div class="message-header">
-					<div class="username">user</div>
-					<div class="time">{{ message.created_at | date:'hh:mma' }}</div>
-					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
-					<div class="score">{{ message.score }}</div>
+		<div class="existing-messages-container" ng-repeat="message in allMessages">
+			<div class="message clearfix">
+				<div class="message-avatar">
+					<img src="img/user_placeholder.jpg">
 				</div>
-				<div class="message-text">
-					{{ message.content }}
+				<div class="message-content">
+					<div class="message-header">
+						<div class="username">user</div>
+						<div class="time">{{ message.created_at | date:'hh:mma' }}</div>
+						<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+						<div class="score">{{ message.score }}</div>
+					</div>
+					<div class="message-text">
+						{{ message.content }}
+					</div>
 				</div>
 			</div>
 		</div>
+		<div class="new-messages-container">
+			<!-- <div class="user-typing"><span class="username">user</span> is typing...</div> -->
+		</div>
+
+
+		<!--
+		<div class="message clearfix">
+		<div class="message-avatar">
+		<img src="img/user_placeholder.jpg">
 	</div>
-	<div class="new-messages-container"></div>
-
-
-	<!--
-	<div class="message clearfix">
-	<div class="message-avatar">
-	<img src="img/user_placeholder.jpg">
-</div>
-<div class="message-content">
-<div class="message-header">
-<div class="username">jgoodman94</div>
-<div class="time">11:23 PM</div>
-<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
-<div class="score">238</div>
+	<div class="message-content">
+	<div class="message-header">
+	<div class="username">jgoodman94</div>
+	<div class="time">11:23 PM</div>
+	<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+	<div class="score">238</div>
 </div>
 <div class="message-text">
 Here's some text thoasdlfk ahsdlk fahsd
@@ -101,71 +112,6 @@ Here's some text thoasdlfk ahsdlk fahsd
 	Top content
 </div>
 
-
-
-
-
-<!-- ANGULAR DYNAMIC CONTENT -->
-<!-- <div ng-view></div> -->
-
-
-<script>
-$(function() {
-
-});
-
-var socket = io.connect('http://trofir.com/');
-socket.on('news', function (data) {
-	console.log(data);
-	socket.emit('my other event', { my: 'data' });
-	console.log('here')
-});
-socket.emit('add-user');
-
-socket.on('chat message', function(msgObj){
-	var message = msgObj.content;
-	var time = unixTimeToText(msgObj.time);
-	$('.chat-box > .new-messages-container').append('\
-	<div class="message clearfix">\
-	<div class="message-avatar">\
-	<img src="img/user_placeholder.jpg">\
-	</div>\
-	<div class="message-content">\
-	<div class="message-header">\
-	<div class="username">user</div>\
-	<div class="time">' + time + '</div>\
-	<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>\
-	<div class="score">0</div>\
-	</div>\
-	<div class="message-text">' + message + '</div>\
-	</div>\
-	</div>\
-	');
-	var $chatBox = $('.chat-box');
-	$chatBox.scrollTop($chatBox[0].scrollHeight);
-});
-
-// converts unix timestamp to text
-function unixTimeToText(unix_timestamp) {
-	var date = new Date(unix_timestamp);
-	var hours = date.getHours();
-
-	var suffix = "AM";
-	if (hours >= 12) {
-		suffix = "PM";
-		hours -= 12;
-	}
-	if (hours == 0) {
-		hours = 12;
-	}
-
-	var minutes = "0" + date.getMinutes();
-	var formattedTime = hours + ':' + minutes.substr(-2) + " " + suffix;
-
-	return formattedTime;
-}
-
-</script>
 </body>
 
 </html>

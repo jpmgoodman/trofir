@@ -1,7 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var Course = require('../../models/Course');
 var School = require('../../models/School');
+var Course = require('../../models/Course');
+var Message = require('../../models/Message');
+var User = require('../../models/User');
+
 
 router.route('/')
 
@@ -37,15 +40,30 @@ router.route('/')
                             if (err) res.send(err);
                             course.school_id = school.id
 
-                            course.save(function(err) {
+                            course.save(function(err, course) {
                                 if (err) res.send(err);
-                                res.status(201).json({ message: 'Course created!' });
+                                res.status(201).json({ message: 'Course created!', course: course });
                             });
                         });
     })
 
     .all(function(req, res) {
         res.status(400).send('Bad HTTP request: ' + req.originalMethod);
+    });
+
+
+// get five most recently visited courses
+router.route('/active')
+
+    .get(function(req, res) {
+        Course.find().sort({ updated_at: -1}).limit(5).exec(function(err, courses) {
+            if (err) res.send(err);
+            res.status(200).json(courses);
+        });
+    })
+
+    .all(function(req, res) {
+        res.status(400).send('Unsupported HTTP request: ' + req.originalMethod);
     });
 
 router.route('/:course_id')
@@ -103,6 +121,55 @@ router.route('/:course_id')
         }, function(err, school) {
             if (err) res.send(err);
             res.status(200).json({ message: 'Successfully deleted' })
+        });
+    })
+
+    .all(function(req, res) {
+        res.status(400).send('Unsupported HTTP request: ' + req.originalMethod);
+    });
+
+
+/* CONVENIENT ROUTES */
+
+router.route('/:course_id/messages')
+
+    .get(function(req, res) {
+        Message .find({ course_id: req.params.course_id })
+                .populate({ path: 'user_id', select: 'username avatar_url'})
+                .exec(function(err, messages) {
+                    if (err) res.send(err);
+                    res.status(200).json(messages);
+                })
+    })
+
+    .all(function(req, res) {
+        res.status(400).send('Unsupported HTTP request: ' + req.originalMethod);
+    });
+
+router.route('/:course_id/users')
+    // returns users, sorted by online, then offline
+    .get(function(req, res) {
+        User.find({ current_course_id: req.params.course_id }, function(err, users) {
+            if (err) res.send(err);
+            var numUsers = users.length;
+            var online  = [];
+            var offline = [];
+            var lastPing
+            var diff;
+
+            for (var i = 0; i < numUsers; i++) {
+                lastPing = new Date(users[i].last_ping_from_user).getTime();
+                diff = Date.now() - lastPing;
+
+                // if havent heard back in > 60 secs * 2
+                if (diff > 60000*2)
+                    offline.push(users[i]);
+                else
+                    online.push(users[i]);
+            }
+
+            courseUsers = { online: online, offline: offline }
+            res.status(200).json(courseUsers);
         });
     })
 

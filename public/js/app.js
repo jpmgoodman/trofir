@@ -1,1 +1,1 @@
-angular.module('trofir', ['ngRoute', 'appRoutes', 'ChatroomCtrl', 'NerdService', 'GeekService']);
+angular.module('trofir', ['ngRoute', 'appRoutes', 'ChatroomCtrl', 'MainCtrl', 'LoginCtrl', 'CookieService', 'luegg.directives']);

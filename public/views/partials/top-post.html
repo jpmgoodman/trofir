@@ -1,0 +1,11 @@
+<div class="course-link">
+    <a href="/#/princeton/{{ topPost.course_id._id }}">{{ topPost.course_id.name_tech | limitTo:7 }}</a>
+</div>
+
+<div class="score">
+    {{ topPost.score }}
+</div>
+
+<br>
+<font color="#87B72A">{{ topPost.user_id.username }}</font>:
+{{ topPost.content }}

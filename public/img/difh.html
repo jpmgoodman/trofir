@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<!-- saved from url=(0033)http://localhost:8080/experiments -->
+<html lang="en" hola_ext_inject="disabled"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+	<meta charset="UTF-8">
+	<!--<base href="/">--><base href=".">
+
+	<title>ECO 100 | Trofir</title>
+
+	<!-- FAVICON -->
+	<link rel="icon" type="image/png" href="./difh_files/logo.png">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="http://localhost:8080/libs/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://localhost:8080/libs/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="http://localhost:8080/css/style.css"> <!-- custom styles -->
+
+	<!-- JS -->
+	<script src="./difh_files/jquery.min.js"></script>
+	<script src="./difh_files/angular.min.js"></script>
+	<script src="./difh_files/angular-route.min.js"></script>
+	<script src="./difh_files/socket.io.js"></script>
+
+	<!-- ANGULAR CUSTOM -->
+	<script src="./difh_files/ChatroomCtrl.js"></script>
+	<script src="./difh_files/NerdService.js"></script>
+	<script src="./difh_files/GeekService.js"></script>
+	<script src="./difh_files/appRoutes.js"></script>
+	<script src="./difh_files/app.js"></script>
+<style type="text/css"></style></head>
+<body ng-app="trofir" ng-controller="ChatroomController" class="ng-scope">
+	<div class="navbar">
+		<div class="course-name">
+			Introduction to Microeconomics
+			<i class="fa fa-chevron-down"></i>
+		</div>
+		<div class="logo">
+			<img src="./difh_files/logo.png">
+		</div>
+		<div class="school-name">
+			Princeton
+		</div>
+		<div class="course-selector">
+			<input type="text" class="search-courses" placeholder="Search for courses...">
+			<!-- ngRepeat: course in allCourses --><ul class="course-selection-list ng-scope" ng-repeat="course in allCourses">
+				<li class="course-option ng-binding">
+					Analytical Techniques in Differential Equations
+				</li>
+			</ul><!-- end ngRepeat: course in allCourses --><ul class="course-selection-list ng-scope" ng-repeat="course in allCourses">
+				<li class="course-option ng-binding">
+					Software Engineering for Scientific Computing
+				</li>
+			</ul><!-- end ngRepeat: course in allCourses --><ul class="course-selection-list ng-scope" ng-repeat="course in allCourses">
+				<li class="course-option ng-binding">
+					Planets in the Universe
+				</li>
+			</ul><!-- end ngRepeat: course in allCourses --><ul class="course-selection-list ng-scope" ng-repeat="course in allCourses">
+				<li class="course-option ng-binding">
+					General Relativity
+				</li>
+			</ul><!-- end ngRepeat: course in allCourses --><ul class="course-selection-list ng-scope" ng-repeat="course in allCourses">
+				<li class="course-option ng-binding">
+					Dynamics of Stellar and Planetary Systems
+				</li>
+			</ul><!-- end ngRepeat: course in allCourses --><ul class="course-selection-list ng-scope" ng-repeat="course in allCourses">
+				<li class="course-option ng-binding">
+					Extragalactic Astronomy
+				</li>
+			</ul><!-- end ngRepeat: course in allCourses --><ul class="course-selection-list ng-scope" ng-repeat="course in allCourses">
+				<li class="course-option ng-binding">
+					Seminar in Theoretical Astrophysics
+				</li>
+			</ul><!-- end ngRepeat: course in allCourses --><ul class="course-selection-list ng-scope" ng-repeat="course in allCourses">
+				<li class="course-option ng-binding">
+					General Plasma Physics I
+				</li>
+			</ul><!-- end ngRepeat: course in allCourses --><ul class="course-selection-list ng-scope" ng-repeat="course in allCourses">
+				<li class="course-option ng-binding">
+					Plasma Waves and Instabilities
+				</li>
+			</ul><!-- end ngRepeat: course in allCourses --><ul class="course-selection-list ng-scope" ng-repeat="course in allCourses">
+				<li class="course-option ng-binding">
+					Fusion Plasmas &amp; Plasma Diagnostics
+				</li>
+			</ul><!-- end ngRepeat: course in allCourses --><ul class="course-selection-list ng-scope" ng-repeat="course in allCourses">
+				<li class="course-option ng-binding">
+					Seminar in Plasma Physics
+				</li>
+			</ul><!-- end ngRepeat: course in allCourses --><ul class="course-selection-list ng-scope" ng-repeat="course in allCourses">
+				<li class="course-option ng-binding">
+					Special Topics in Low Temperature Plasma (Half-Term)
+				</li>
+			</ul><!-- end ngRepeat: course in allCourses --><ul class="course-selection-list ng-scope" ng-repeat="course in allCourses">
+				<li class="course-option ng-binding">
+					Life in the Universe
+				</li>
+			</ul><!-- end ngRepeat: course in allCourses --><ul class="course-selection-list ng-scope" ng-repeat="course in allCourses">
+				<li class="course-option ng-binding">
+					Applications of Quantum Mechanics to Spectroscopy and Lasers
+				</li>
+			</ul><!-- end ngRepeat: course in allCourses -->
+		</div>
+	</div>
+
+	<div class="users-online" style="text-align: center">
+		<!-- ngRepeat: user in courseUsers --><ul class="user-list ng-scope" ng-repeat="user in courseUsers">
+			<li class="user">
+				<div class="user-avatar"><img src="./difh_files/avatar1.jpg"></div>
+				<div class="user-username ng-binding" title="&quot;El Jefe&quot;">"El Jefe"</div>
+				<div class="user-status"><i class="fa fa-circle"></i></div>
+			</li>
+	</ul><!-- end ngRepeat: user in courseUsers --><ul class="user-list ng-scope" ng-repeat="user in courseUsers">
+			<li class="user">
+				<div class="user-avatar"><img src="./difh_files/avatar1.jpg"></div>
+				<div class="user-username ng-binding" title="King Dom">King Dom</div>
+				<div class="user-status"><i class="fa fa-circle"></i></div>
+			</li>
+	</ul><!-- end ngRepeat: user in courseUsers --><ul class="user-list ng-scope" ng-repeat="user in courseUsers">
+			<li class="user">
+				<div class="user-avatar"><img src="./difh_files/avatar1.jpg"></div>
+				<div class="user-username ng-binding" title="Quadrasaurus Pecs">Quadrasaurus Pecs</div>
+				<div class="user-status"><i class="fa fa-circle"></i></div>
+			</li>
+	</ul><!-- end ngRepeat: user in courseUsers --><ul class="user-list ng-scope" ng-repeat="user in courseUsers">
+			<li class="user">
+				<div class="user-avatar"><img src="./difh_files/avatar1.jpg"></div>
+				<div class="user-username ng-binding" title="yomomma">yomomma</div>
+				<div class="user-status"><i class="fa fa-circle"></i></div>
+			</li>
+	</ul><!-- end ngRepeat: user in courseUsers --><ul class="user-list ng-scope" ng-repeat="user in courseUsers">
+			<li class="user">
+				<div class="user-avatar"><img src="./difh_files/avatar1.jpg"></div>
+				<div class="user-username ng-binding" title="poppaG">poppaG</div>
+				<div class="user-status"><i class="fa fa-circle"></i></div>
+			</li>
+	</ul><!-- end ngRepeat: user in courseUsers --><ul class="user-list ng-scope" ng-repeat="user in courseUsers">
+			<li class="user">
+				<div class="user-avatar"><img src="./difh_files/avatar1.jpg"></div>
+				<div class="user-username ng-binding" title="kPup">kPup</div>
+				<div class="user-status"><i class="fa fa-circle"></i></div>
+			</li>
+	</ul><!-- end ngRepeat: user in courseUsers -->
+</div>
+
+<div class="chat-box">
+
+
+	<!-- ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">12:18AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					yo
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">12:18AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					whatsup dawg!
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">12:19AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					waddduppp
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">12:21AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					yo
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">12:23AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					yoi
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">12:24AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					yo
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">12:24AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					yo
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">12:24AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					waddup
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">12:25AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					sup
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">12:25AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					nm bro
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">12:31AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					sup
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">12:31AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					hey hehe
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">12:51AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					waddup cuz!
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">12:51AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					yo!
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">12:51AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					waddddup!
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">12:52AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					not much man! :)
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">12:57AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					yooo!
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">12:57AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					hey :)
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">12:58AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					howdy!
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">12:59AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					sup :)
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">12:59AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					nm!
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">01:11AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					huh
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">01:13AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					works?
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">01:15AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					test
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">01:16AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					test2
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">01:18AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					test3
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">01:19AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					test4
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">01:20AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					woo!
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">01:32AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					wsup
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">01:36AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					sweet
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">01:36AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					this is the dev database
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">01:36AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					but uses trofir.com's socket connection
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">01:37AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					should probably make it so no random server can route traffic thru there
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">01:39AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					does this work?
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">01:39AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					still thru trofir server
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">01:39AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					huh
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">01:40AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					ok now it works again, still thru trofir server tho
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">01:42AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					this is pretty sweet to
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">01:42AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					yo*
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">02:00AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					beautiful
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">02:14AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					testingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtesting
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">02:14AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					testingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtestingtesting
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">02:32AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					test
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">02:33AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					testzzz
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">02:33AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					test
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">02:33AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					???
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages --><div class="existing-messages-container ng-scope" ng-repeat="message in allMessages">
+		<div class="message clearfix">
+			<div class="message-avatar">
+				<img src="./difh_files/user_placeholder.jpg">
+			</div>
+			<div class="message-content">
+				<div class="message-header">
+					<div class="username">user</div>
+					<div class="time ng-binding">02:34AM</div>
+					<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+					<div class="score ng-binding">0</div>
+				</div>
+				<div class="message-text ng-binding">
+					what
+				</div>
+			</div>
+		</div>
+	</div><!-- end ngRepeat: message in allMessages -->
+	<div class="new-messages-container">
+		<div class="user-typing"><span class="username">user</span> is typing...</div>
+	</div>
+
+
+	<!--
+	<div class="message clearfix">
+	<div class="message-avatar">
+	<img src="img/user_placeholder.jpg">
+</div>
+<div class="message-content">
+<div class="message-header">
+<div class="username">jgoodman94</div>
+<div class="time">11:23 PM</div>
+<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>
+<div class="score">238</div>
+</div>
+<div class="message-text">
+Here's some text thoasdlfk ahsdlk fahsd
+</div>
+</div>
+</div> -->
+
+<form class="message-form ng-pristine ng-valid" ng-submit="sendMessage()">
+	<input ng-model="messageData.content" type="text" class="send-message ng-pristine ng-untouched ng-valid" name="send-message" placeholder="Send a message..." autocomplete="off">
+</form>
+</div>
+
+<div class="top-content">
+	Top content
+</div>
+
+
+
+
+
+<!-- ANGULAR DYNAMIC CONTENT -->
+<!-- <div ng-view></div> -->
+
+
+<script>
+
+
+var socket = io.connect('http://trofir.com/');
+
+socket.on('news', function (data) {
+	console.log(data);
+	socket.emit('my other event', { my: 'data' });
+	console.log('here')
+});
+
+socket.emit('add-user');
+
+socket.on('chat message', function(msgObj){
+	var message = msgObj.content;
+	var time = unixTimeToText(msgObj.time);
+	$('.chat-box > .new-messages-container').append('\
+	<div class="message clearfix">\
+	<div class="message-avatar">\
+	<img src="img/user_placeholder.jpg">\
+	</div>\
+	<div class="message-content">\
+	<div class="message-header">\
+	<div class="username">user</div>\
+	<div class="time">' + time + '</div>\
+	<div class="upvote"><i class="fa fa-thumbs-o-up"></i></div>\
+	<div class="score">0</div>\
+	</div>\
+	<div class="message-text">' + message + '</div>\
+	</div>\
+	</div>\
+	');
+	var $chatBox = $('.chat-box');
+	$chatBox.scrollTop($chatBox[0].scrollHeight);
+});
+
+// converts unix timestamp to text
+function unixTimeToText(unix_timestamp) {
+	var date = new Date(unix_timestamp);
+	var hours = date.getHours();
+
+	var suffix = "AM";
+	if (hours >= 12) {
+		suffix = "PM";
+		hours -= 12;
+	}
+	if (hours == 0) {
+		hours = 12;
+	}
+
+	var minutes = "0" + date.getMinutes();
+	var formattedTime = hours + ':' + minutes.substr(-2) + " " + suffix;
+
+	return formattedTime;
+}
+
+</script>
+
+
+
+</body></html>

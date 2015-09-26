@@ -1,0 +1,38 @@
+
+  <div class="left sidebar" style="float: right;">
+    <div class="stuckbar logo">
+      <img src="img/logo2.png"> Trofir
+    </div>
+
+    <ul class="course-list">
+      <div class="search-courses">
+        <i class="fa fa-search"></i>
+        <input type="text" placeholder="Search for courses..." ng-model="courseQuery">
+      </div>
+      <li class="course-option" ng-repeat="courseOption in myCourses | filter:courseQuery | orderBy:'name'">
+        <a href="/#/princeton/{{ courseOption._id }}" ng-class="{'selected': {{ course._id == courseOption._id }} }">
+          {{ courseOption.name_tech | limitTo:7 }}
+        </a>
+      </li>
+    </ul>
+
+    <div class="course-users" style="text-align: center">
+      <ul class="user-list online-users">
+        <li class="user" ng-repeat="user in courseUsers.online.slice().reverse()">
+          <div class="user-avatar"><img src="{{ user.avatar_url }}"></div>
+          <div class="user-username" title="{{ user.username }}">{{ user.username }}</div>
+        </li>
+      </ul>
+
+      <ul class="user-list offline-users">
+        <li class="user" ng-repeat="user in courseUsers.offline.slice().reverse()">
+          <div class="user-avatar offline"><img src="{{ user.avatar_url }}"></div>
+          <div class="user-username" title="{{ user.username }}">{{ user.username }}</div>
+        </li>
+      </ul>
+    </div>
+
+
+
+
+  </div>
