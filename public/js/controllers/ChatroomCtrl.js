@@ -12,6 +12,8 @@ angular.module('ChatroomCtrl', ['CookieService']).controller('ChatroomController
         $window.location.href = '/#/login';
     }
     else {
+
+        console.log('in here');
         var socket = io.connect('', { forceNew: true });
         console.log('in new chatroom');
         $http.put('/api/users/' + $rootScope.my_id, { current_course_id: $rootScope.courseId })
@@ -122,6 +124,26 @@ angular.module('ChatroomCtrl', ['CookieService']).controller('ChatroomController
         });
 
 
+        $scope.newCourseSelect = function(course) {
+
+            for (var i = 0; i < $rootScope.myCourses.length; i++) {
+                if ($rootScope.myCourses[i]._id == course._id)
+                    return;
+            }
+
+            $rootScope.myCourses.unshift(course);
+            $rootScope.myCourses.splice(-1,1);
+            var myCourseIds = $rootScope.myCourses.map(function(obj) {
+                return obj._id;
+            });
+            
+            $http.put('/api/users/' + $rootScope.my_id, { saved_course_ids: myCourseIds })
+            .then(function(res) {
+                console.log(res);
+            });
+        }
+
+
 
         // process the form
         $scope.sendMessage = function() {
@@ -222,6 +244,8 @@ angular.module('ChatroomCtrl', ['CookieService']).controller('ChatroomController
             return formattedTime;
         }
 
+
+
         $scope.$on("$destroy", function() {
             socket.emit('remove user', courseId);
         });
@@ -230,4 +254,7 @@ angular.module('ChatroomCtrl', ['CookieService']).controller('ChatroomController
             timeoutFunction();
         }
     }
+
+
+
 });

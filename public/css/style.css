@@ -1,407 +1,424 @@
 html, body {
-  font-family: sans-serif;
-  background-color: #f9f9f9;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  height: 100%;
+    font-family: sans-serif;
+    background-color: #f9f9f9;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
 }
 div, input {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 .overlay {
-  background-color: rgba(0,0,0,1);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 10000;
+    background-color: rgba(0,0,0,1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
 }
 .overlay > .username-prompt {
-  color: white;
-  text-align: center;
-  margin: 0 auto;
-  font-size: 50px;
-  padding: 25px;
-  font-weight: lighter;
+    color: white;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 50px;
+    padding: 25px;
+    font-weight: lighter;
 }
 .overlay > .username-prompt > form.username-form > input[type='text'].username-input {
-  color: cyan;
-  font-weight: bold;
-  text-align: center;
-  border: none;
-  border-bottom: solid white 5px;
-  background-color: transparent;
-  outline: none;
-  margin: 25px 0 25px 0;
-  padding: 10px;
-  width: 600px;
+    color: cyan;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    border-bottom: solid white 5px;
+    background-color: transparent;
+    outline: none;
+    margin: 25px 0 25px 0;
+    padding: 10px;
+    width: 600px;
 }
 .overlay > .username-prompt > img.logo {
-  width: 150px;
-  margin: 25px;
+    width: 150px;
+    margin: 25px;
 }
 @media (max-width: 1020px) {
-  .right.sidebar {
-    display: none;
-  }
-  .chat-box, .message-form {
-    width: calc(100% - 250px) !important;
-  }
+    .right.sidebar {
+        display: none;
+    }
+    .chat-box, .message-form {
+        width: calc(100% - 250px) !important;
+    }
 
-  .message > .message-content{
-    max-width: calc(100vw - 450px) !important;
-  }
+    .message > .message-content{
+        max-width: calc(100vw - 450px) !important;
+    }
 
 }
 @media (max-width: 900px) {
-  .overlay > .username-prompt > input[type='text'] {
-    width: 100%;
-  }
+    .overlay > .username-prompt > input[type='text'] {
+        width: 100%;
+    }
 }
 .container {
-  border: solid;
+    border: solid;
 }
 div {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 input {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 .chat-box {
-  overflow-y: auto;
-  z-index: 12;
-  margin-top: 60px;
-  float: left;
-  height: calc(100vh - 114px);
-  padding: 50px 30px 0px 30px;
-  position: relative;
-  width: calc(100% - 550px);
+    overflow-y: auto;
+    z-index: 12;
+    margin-top: 60px;
+    float: left;
+    height: calc(100vh - 114px);
+    padding: 50px 30px 0px 30px;
+    position: relative;
+    width: calc(100% - 550px);
 }
 .course-header {
-  border: solid #dfdfdf 1px;
-  border-top: none;
-  position: fixed;
-  top: 0;
-  left: 250px;
-  height: 60px;
-  padding: 10px;
-  font-size: 1.8em;
-  width: 100%;
-  background-color: #f9f9f9;
-  color: #0C3F46;
-  overflow-x: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  z-index: 15 ;
+    border: solid #dfdfdf 1px;
+    border-top: none;
+    position: fixed;
+    top: 0;
+    left: 250px;
+    height: 60px;
+    padding: 10px;
+    font-size: 1.8em;
+    width: 100%;
+    background-color: #f9f9f9;
+    color: #0C3F46;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    z-index: 15 ;
 }
 .chat-box > .users-typing {
-  margin-bottom: 30px;
+    margin-bottom: 30px;
 }
 .message {
-  width: 100%;
+    width: 100%;
 }
 .message > .message-content {
-  background-color: white;
-  float: left;
-  padding: 10px;
-  border: solid rgba(236,241,245,1) 1px;
-  border-radius: 3px;
-  min-width: 300px;
-  max-width: calc(100vw - 720px);
-  word-wrap: break-word;
+    background-color: white;
+    float: left;
+    padding: 10px;
+    border: solid rgba(236,241,245,1) 1px;
+    border-radius: 3px;
+    min-width: 300px;
+    max-width: calc(100vw - 750px);
+    word-wrap: break-word;
 }
 .message > .message-content > .message-header {
-  margin-bottom: 10px;
-  color: green;
+    margin-bottom: 10px;
+    color: green;
 }
 .message-header > div {
-  display: inline-block;
+    display: inline-block;
 }
 .message-header > .time {
-  color: grey;
-  font-weight: lighter;
-  font-size: 0.8em;
-}
-.message:hover .upvote {
+    color: grey;
+    font-weight: lighter;
+    font-size: 0.8em;
 }
 .message > .upvote {
-  margin: auto;
-  padding: 10px;
-  color: #0C3F46;
-  opacity: 0.5;
+    margin: auto;
+    padding: 10px;
+    color: #0C3F46;
+    opacity: 0.5;
+    font-size: 1.2em;
+}
+.message > .upvote > .fa.fa-heart:hover {
+    cursor: pointer;
+    color: red;
 }
 .message > .upvote > div {
-  display: inline-block;
+    display: inline-block;
 }
 .message > .upvote > .score {
-  color: grey;
+    color: grey;
 }
- .message > div {
-  display: inline-block;
+.message > div {
+    display: inline-block;
 }
 .message > .message-avatar{
-  height: 100%;
-  float: left;
-  margin-right: 10px;
+    height: 100%;
+    float: left;
+    margin-right: 10px;
 }
 .message > .message-avatar > img {
-  height: 50px;
-  width: 50px;
-  border: solid lightgrey 1px;
-  border-radius: 5px;
+    height: 50px;
+    width: 50px;
+    border: solid lightgrey 1px;
+    border-radius: 5px;
 }
 
 .message > .message-text {
-  float: right;
+    float: right;
 }
 
 ul.users-typing {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  margin-top: 15px;
-  display: inline-block;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    margin-top: 15px;
+    display: inline-block;
 }
 ul.users-typing > li {
-  display: inline-block;
-  color: green;
+    display: inline-block;
+    color: green;
 }
 .users-typing-suffix {
-  display: none;
+    display: none;
 }
 .to-be.are, .to-be.is {
-  display: none;
+    display: none;
 }
 .message-form {
-  position: fixed;
-  left: 250px;
-  bottom: 0px;
-  line-height: 30px;
-  padding: 5px;
-  width: calc(100% - 550px);
-  border: solid #dfdfdf 1px;
-  border-right: none;
-  background-color: #f2f2f2;
+    position: fixed;
+    left: 250px;
+    bottom: 0px;
+    line-height: 30px;
+    padding: 5px;
+    width: calc(100% - 550px);
+    border: solid #dfdfdf 1px;
+    border-right: none;
+    background-color: #f2f2f2;
 }
 .message-form > input[type='text'] {
-  width: 100%;
-  font-size: 1.2em;
-  padding: 5px 10px 5px 10px;
-  box-sizing: border-box;
-  border: solid #dfdfdf 1px;
-  border-radius: 5px;
+    width: 100%;
+    font-size: 1.2em;
+    padding: 5px 10px 5px 10px;
+    box-sizing: border-box;
+    border: solid #dfdfdf 1px;
+    border-radius: 5px;
 
-  transition:  .25s ease-in-out;
-  -moz-transition:  .25s ease-in-out;
-  -webkit-transition:  .25s ease-in-out;
+    transition:  .25s ease-in-out;
+    -moz-transition:  .25s ease-in-out;
+    -webkit-transition:  .25s ease-in-out;
 }
 .message-form > input[type='text']:focus {
-  outline: none;
+    outline: none;
+    border: solid rgba(135, 183, 42, 1) 1px;
 }
 
 .clearfix {
-  display: inline-block;
+    display: inline-block;
 }
 .clearfix:after {
-  content: ".";
-  display: block;
-  clear: both;
-  visibility: hidden;
-  line-height: 0;
-  height: 0;
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
 }
 html[xmlns] .clearfix {
-  display: block;
+    display: block;
 }
 * html .clearfix {
-  height: 1%;
+    height: 1%;
 }
 .top-content {
-  overflow-y: auto;
-  text-align: center;
-  color: black;
-  margin-top: 20px;
+    overflow-y: auto;
+    text-align: center;
+    color: black;
+    margin-top: 20px;
 }
 .top-content > li.top-post {
-  background-color: white;
-  border: solid #dfdfdf 1px;
-  margin: 5px 0 5px 0;
-  padding: 15px;
-  border-radius: 3px;
+    background-color: white;
+    border: solid #dfdfdf 1px;
+    margin: 5px 0 5px 0;
+    padding: 15px;
+    border-radius: 3px;
 }
 .top-content > li.top-post > .course-link {
-  float: left;
+    float: left;
 }
 .top-content > li.top-post > .score {
-  float: right;
-  color: lightgrey;
+    float: right;
+    color: lightgrey;
 }
 .top-content > li.top-post > .score > .fa.fa-heart {
 }
 /* chatroom 2 style */
 .sidebar {
-  width: 250px;
-  text-align: center;
-  color: white;
-  overflow-y: auto;
-  position: relative;
-  top: 60px;
-  height: calc(100vh - 60px);
-  padding: 20px;
-  -webkit-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
-  -moz-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
-  box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+    width: 250px;
+    text-align: center;
+    color: white;
+    overflow-y: auto;
+    position: relative;
+    top: 60px;
+    height: calc(100vh - 60px);
+    padding: 20px;
+    -webkit-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
 }
 .left.sidebar {
-  float: left;
-  text-align: left;
-  background-color: #0C3F46;
+    float: left;
+    text-align: left;
+    background-color: #0C3F46;
 
 }
 .right.sidebar {
-  width: 300px;
-  float: right;
-  box-shadow: none;
-  border: solid #dfdfdf 1px;
-  border-top: none;
-  background-color: #f2f2f2;
+    width: 300px;
+    float: right;
+    box-shadow: none;
+    border: solid #dfdfdf 1px;
+    border-top: none;
+    background-color: #f2f2f2;
 }
 .right.sidebar > .fa.fa-line-chart {
-  font-size: 2em;
-  color: #0C3F46;
+    font-size: 2em;
+    color: #0C3F46;
 }
 .left.sidebar > .stuckbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 250px;
-  height: 60px;
-  padding: 8px;
-  font-size: 1.8em;
-  font-weight: bold;
-  color: #0C3F46;
-  text-align: left;
-  background-color: #f9f9f9;
-  border-bottom: solid #dfdfdf 1px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 60px;
+    padding: 8px;
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #0C3F46;
+    text-align: left;
+    background-color: #f9f9f9;
+    border-bottom: solid #dfdfdf 1px;
 
 }
 .left.sidebar > .stuckbar > img {
-  height: 100%;
-  margin-right: 5px;
+    height: 100%;
+    margin-right: 5px;
 }
 .right.sidebar > .stuckbar {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 300px;
-  padding: 10px;
-  color: black;
-  font-weight: bold;
-  height: 60px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 300px;
+    padding: 10px;
+    color: black;
+    font-weight: bold;
+    height: 60px;
 }
 .stuckbar {
-  z-index: 10;
-  font-size: 1.8em;
-  background-color: #f2f2f2;
+    z-index: 10;
+    font-size: 1.8em;
+    background-color: #f2f2f2;
 }
 ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 .left.sidebar > ul.course-list {
-  width: 100%;
-  font-size: 1.2em;
-  font-weight: bold;
-  text-align: left;
+    width: 100%;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: left;
 }
 .left.sidebar > ul.course-list > li {
-  border-radius: 3px;
-  text-align: left;
-  color: #87B72A;
-  margin-bottom: 5px;
-  line-height: 2.5em;
-  height: 2.5em;
+    border-radius: 3px;
+    text-align: left;
+    color: #87B72A;
+    margin-bottom: 5px;
+    line-height: 2.5em;
+    height: 2.5em;
 }
 .left.sidebar > ul.course-list > li > a {
-  color: #87B72A;
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: 3px;
-  padding: 0 8px 0 8px;
-  overflow-x: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+    color: #87B72A;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 3px;
+    padding: 0 8px 0 8px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .left.sidebar > ul.course-list > li > a:hover {
-  text-decoration: none;
-  background-color: rgba(135,183,42,0.2);
+    text-decoration: none;
+    background-color: rgba(135,183,42,0.2);
 }
 
 .left.sidebar > ul.course-list > li > a.selected {
-  background-color: #87B72A;
-  color: #0C3F46;
+    background-color: #87B72A;
+    color: #0C3F46;
+    -webkit-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
 }
 .left.sidebar > ul.course-list > li.selected:hover {
-  cursor: default;
+    cursor: default;
 }
 .left.sidebar > ul.course-list > .search-courses {
-  position: relative;
-  margin-bottom: 20px;
+    position: relative;
+    margin-bottom: 20px;
 }
 .left.sidebar > ul.course-list > .search-courses > .fa.fa-search {
-  position: absolute;
-  color: #0C3F46;
-  height: 1em;
-  top: 10px;
-  left: 8px;
+    position: absolute;
+    color: #0C3F46;
+    height: 1em;
+    top: 10px;
+    left: 8px;
 }
+.left.sidebar > ul.course-list > .search-courses > .fa.fa-times-circle {
+    position: absolute;
+    color: #0C3F46;
+    line-height: 30px;
+    top: 5px;
+    right: 8px;
+    padding: 0 2px 0 2px;
+    cursor: pointer;
+}
+
 .left.sidebar > ul.course-list > .search-courses > input[type='text'] {
-  color: black;
-  border: none;
-  padding: 5px 15px 5px 28px;
-  width: 100%;
-  border-radius: 10px;
-  font-weight: normal;
-  border: solid #0C3F46 3px;
-  background-color: #f2f2f2;
+    color: black;
+    border: none;
+    padding: 5px 25px 5px 25px;
+    width: 100%;
+    border-radius: 10px;
+    font-weight: normal;
+    border: solid #0C3F46 3px;
+    background-color: #f2f2f2;
 }
 .left.sidebar > ul.course-list > .search-courses > input[type='text']:focus {
-  outline:none;
-  border: solid #87B72A 3px;
-  background-color: white;
+    outline:none;
+    border: solid #87B72A 3px;
+    background-color: white;
 }
 .left.sidebar > .course-users {
-  width: 100%;
-  font-size: 1.2em;
-  font-weight: bold;
-  margin-top: 20px;
-  font-weight: normal;
-  color: lightgrey;
+    width: 100%;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 20px;
+    font-weight: normal;
+    color: lightgrey;
 }
 .left.sidebar > .course-users > .user-list > li.user {
-  text-align: left;
-  margin-bottom: 10px;
-  position: relative;
+    text-align: left;
+    margin-bottom: 10px;
+    position: relative;
 }
 .left.sidebar > .course-users > .user-list > li.user > div {
-  display: inline-block;
-  vertical-align: middle;
+    display: inline-block;
+    vertical-align: middle;
 }
 .left.sidebar > .course-users > .user-list > li.user > .user-avatar > img {
-  height: 30px;
-  width: 30px;
-  border-radius: 100%;
-  border: solid #87B72A 5px;
-  margin-right: 5px;
+    height: 30px;
+    width: 30px;
+    border-radius: 100%;
+    border: solid #87B72A 5px;
+    margin-right: 5px;
 }
 .left.sidebar > .course-users > .user-list > li.user > .user-avatar.offline > img {
-  border: solid lightgrey 5px;
+    border: solid lightgrey 5px;
 }
 
 a:hover, a:visited, a:focus {
-  text-decoration: none;
+    text-decoration: none;
 }

@@ -1,8 +1,9 @@
 <div class="course-link">
-    <a href="/#/princeton/{{ topPost.course_id._id }}">{{ topPost.course_id.name_tech | limitTo:7 }}</a>
+    <a href="/#/princeton/{{ topPost.course_id._id }}" ng-click="newCourseSelect(courseOption);">{{ topPost.course_id.name_tech | limitTo:7 }}</a>
 </div>
 
 <div class="score">
+    <i class="fa fa-heart"></i>
     {{ topPost.score }}
 </div>
 
