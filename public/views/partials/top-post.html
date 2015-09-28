@@ -2,8 +2,14 @@
     <a href="/#/princeton/{{ topPost.course_id._id }}" ng-click="newCourseSelect(courseOption);">{{ topPost.course_id.name_tech | limitTo:7 }}</a>
 </div>
 
-<div class="score">
-    <i class="fa fa-heart"></i>
+<div class="score" ng-init="isLiked = (myLikes.indexOf(topPost._id) > -1); preLiked - isLiked;">
+    <i class="fa fa-heart" ng-class="{'selected': isLiked}" ng-click="likeMessage(message._id, isLiked); isLiked = !isLiked;"></i>
+    <!-- <div ng-if="preLiked">
+        {{ isLiked ? topPost.score : topPost.score - 1 }}
+    </div>
+    <div ng-if="!preLiked">
+        {{ isLiked ? topPost.score + 1 : topPost.score }}
+    </div> -->
     {{ topPost.score }}
 </div>
 

@@ -11,7 +11,13 @@
     </div>
 </div>
 
-<div class="upvote">
-    <i class="fa fa-heart"></i>
-    <div class="score">{{ message.score }}</div>
+<div class="upvote" ng-init="isLiked = (myLikes.indexOf(message._id) > -1); preLiked = isLiked;">
+    <i class="fa fa-heart" ng-class="{'selected': isLiked}" ng-click="likeMessage(message._id, isLiked); isLiked = !isLiked;"></i>
+
+    <div class="score pre-liked" ng-if="preLiked">
+        {{ isLiked ? message.score : message.score - 1 }}
+    </div>
+    <div class="score" ng-if="!preLiked">
+        {{ isLiked ? message.score + 1 : message.score }}
+    </div>
 </div>

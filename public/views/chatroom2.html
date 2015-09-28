@@ -71,6 +71,7 @@
 
         <div class="existing-messages-container">
             <div class="message clearfix" ng-repeat="message in allMessages"
+            data-id="{{ message._id }}"
             ng-include src="'./views/partials/chat-message.html'">
             </div>
         </div>

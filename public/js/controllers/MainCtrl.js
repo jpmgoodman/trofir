@@ -7,7 +7,7 @@ angular.module('MainCtrl', ['CookieService']).controller('MainController', funct
             $rootScope.my_avatar_url = user.avatar_url;
             $rootScope.my_username = user.username;
             $rootScope.myCourses = user.saved_course_ids;
-            console.log($rootScope.myCourses);
+            $rootScope.myLikes = user.liked_message_ids;
         });
 
         $http.put('/api/users/' + $rootScope.my_id, { last_logged_on: Date.now() })

@@ -70,6 +70,8 @@ router.route('/:message_id')
                 message.content = req.body.content;
             if (req.body.score)
                 message.score = req.body.score;
+            if (req.body.inc_amt)
+                message.score += req.body.inc_amt;
 
             message.save(function(err) {
                 if (err) res.send(err);
@@ -90,6 +92,5 @@ router.route('/:message_id')
     .all(function(req, res) {
         res.status(400).send('Unsupported HTTP request: ' + req.originalMethod);
     });
-
 
 module.exports = router;

@@ -75,6 +75,8 @@ router.route('/:user_id')
                 user.current_course_id = req.body.current_course_id;
             if (req.body.saved_course_ids)
                 user.saved_course_ids = req.body.saved_course_ids;
+            if (req.body.liked_message_ids)
+                user.liked_message_ids = req.body.liked_message_ids;
             if (req.body.username)
                 user.username = req.body.username;
             if (req.body.last_logged_on)

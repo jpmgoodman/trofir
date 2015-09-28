@@ -38,6 +38,7 @@ angular.module('LoginCtrl', ['CookieService']).controller('LoginController', fun
                     $rootScope.my_username = res.data.user.username;
                     $rootScope.my_avatar_url = res.data.user.avatar_url;
                     $rootScope.myCourses = res.data.saved_course_ids;
+                    $rootScope.myLikes = [];
                     heartbeat();
                     $window.location.href = redirectURL;
 

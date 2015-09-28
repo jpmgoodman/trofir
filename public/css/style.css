@@ -128,19 +128,24 @@ input {
     margin: auto;
     padding: 10px;
     color: #0C3F46;
-    opacity: 0.5;
     font-size: 1.2em;
+}
+.message > .upvote > .score, .message > .upvote > .fa.fa-heart {
+    opacity: 0.3;
 }
 .message > .upvote > .fa.fa-heart:hover {
     cursor: pointer;
     color: red;
+    opacity: 0.5;
+}
+.message > .upvote > .fa.fa-heart.selected {
+    color: red;
+    opacity: 1;
 }
 .message > .upvote > div {
     display: inline-block;
 }
-.message > .upvote > .score {
-    color: grey;
-}
+
 .message > div {
     display: inline-block;
 }
@@ -242,8 +247,21 @@ html[xmlns] .clearfix {
     float: right;
     color: lightgrey;
 }
-.top-content > li.top-post > .score > .fa.fa-heart {
+.top-content > li.top-post > .score > div {
+    display: inline-block;
 }
+.top-content > li.top-post > .score > .fa.fa-heart {
+    padding: 0 2px 0 2px;
+}
+.top-content > li.top-post > .score > .fa.fa-heart:hover {
+    color: red;
+    opacity: 0.5;
+    cursor: pointer;
+}
+.top-content > li.top-post > .score > .fa.fa-heart.selected {
+    opacity: 1;
+}
+
 /* chatroom 2 style */
 .sidebar {
     width: 250px;

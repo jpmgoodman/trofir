@@ -49,7 +49,7 @@ angular.module('ChatroomCtrl', ['CookieService']).controller('ChatroomController
         $('.message-form > .send-message').keydown(function(e) {
             // don't do anything if not alphanumeric key
             if (!(e.keyCode >= 48 && e.keyCode <= 57) && !(e.keyCode >= 65 && e.keyCode <= 90))
-                return;
+            return;
 
             if (typing == false) {
                 typing = true;
@@ -95,7 +95,7 @@ angular.module('ChatroomCtrl', ['CookieService']).controller('ChatroomController
             // must reorganize list elements
             var numTyping = $('ul.users-typing li').length;
             if (numTyping == 0)
-                $('.users-typing-suffix').hide();
+            $('.users-typing-suffix').hide();
             else if (numTyping < 2) {
                 $('.users-typing > .conjunction').remove();
                 $('.to-be.are').hide();
@@ -113,9 +113,9 @@ angular.module('ChatroomCtrl', ['CookieService']).controller('ChatroomController
                 var listEl = '<li data-id=' + currUserID + '>' + currUsername + '</li>';
 
                 if (i < numTyping - 2)
-                    listEl += ', '
+                listEl += ', '
                 else if (i == numTyping - 2)
-                    listEl += ' <span class="conjunction"> and </span> '
+                listEl += ' <span class="conjunction"> and </span> '
 
                 reformatted += listEl;
             }
@@ -128,7 +128,7 @@ angular.module('ChatroomCtrl', ['CookieService']).controller('ChatroomController
 
             for (var i = 0; i < $rootScope.myCourses.length; i++) {
                 if ($rootScope.myCourses[i]._id == course._id)
-                    return;
+                return;
             }
 
             $rootScope.myCourses.unshift(course);
@@ -136,13 +136,37 @@ angular.module('ChatroomCtrl', ['CookieService']).controller('ChatroomController
             var myCourseIds = $rootScope.myCourses.map(function(obj) {
                 return obj._id;
             });
-            
+
             $http.put('/api/users/' + $rootScope.my_id, { saved_course_ids: myCourseIds })
             .then(function(res) {
                 console.log(res);
             });
         }
 
+        $scope.likeMessage = function(m_id, unlike) {
+            console.log(unlike);
+            var incAmt = 0;
+            // like post
+            if (!unlike) {
+                $rootScope.myLikes.push(m_id);
+                incAmt = 1;
+            }
+            // unlike post
+            else {
+                $rootScope.myLikes.splice($rootScope.myLikes.indexOf(m_id), 1);
+                incAmt = -1;
+            }
+
+            $http.put('/api/users/' + $rootScope.my_id, { liked_message_ids: $rootScope.myLikes })
+            .then(function(res) {
+                console.log(res);
+            });
+
+            $http.put('/api/messages/' + m_id, { inc_amt: incAmt })
+            .then(function(res) {
+                console.log(res);
+            })
+        }
 
 
         // process the form
@@ -150,7 +174,7 @@ angular.module('ChatroomCtrl', ['CookieService']).controller('ChatroomController
 
             var message = $('.message-form > .send-message').val().trim();
             if (message.length < 1)
-                return;
+            return;
 
             clearTimeout(timeout);
             timeoutFunction();
