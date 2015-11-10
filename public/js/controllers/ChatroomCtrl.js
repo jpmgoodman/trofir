@@ -1,4 +1,4 @@
-angular.module('ChatroomCtrl', ['CookieService']).controller('ChatroomController', function($rootScope, $window, $scope, $http, $routeParams, cookie) {
+angular.module('ChatroomCtrl', ['CookieService']).controller('ChatroomController', function($compile, $rootScope, $window, $scope, $http, $routeParams, cookie) {
 
     var courseId = $routeParams.course_id;
     var princetonId = '55d8565c54696be3d6f7cde6';
@@ -169,6 +169,7 @@ angular.module('ChatroomCtrl', ['CookieService']).controller('ChatroomController
         }
 
 
+
         // process the form
         $scope.sendMessage = function() {
 
@@ -179,7 +180,7 @@ angular.module('ChatroomCtrl', ['CookieService']).controller('ChatroomController
             clearTimeout(timeout);
             timeoutFunction();
 
-            $('.chat-box > .new-messages-container').append('\
+            $('.chat-box > .messages-container').append('\
             <div class="message clearfix">\
             <div class="message-avatar">\
             <img src=' + $rootScope.my_avatar_url + '>\
@@ -191,12 +192,27 @@ angular.module('ChatroomCtrl', ['CookieService']).controller('ChatroomController
             </div>\
             <div class="message-text">' + message + '</div>\
             </div>\
-            <div class="upvote">\
-            <i class="fa fa-heart"></i>\
-            <div class="score">0</div>\
-            </div>\
             </div>\
             ');
+
+            // $('.chat-box > .messages-container').append('\
+            // <div class="message clearfix">\
+            // <div class="message-avatar">\
+            // <img src=' + $rootScope.my_avatar_url + '>\
+            // </div>\
+            // <div class="message-content">\
+            // <div class="message-header">\
+            // <div class="username">' + $rootScope.my_username + '</div>\
+            // <div class="time">' + unixTimeToText(Date.now()) + '</div>\
+            // </div>\
+            // <div class="message-text">' + message + '</div>\
+            // </div>\
+            // <div class="upvote">\
+            // <i class="fa fa-heart"></i>\
+            // <div class="score">0</div>\
+            // </div>\
+            // </div>\
+            // ');
 
             var messageJSON =   {   content: $scope.messageData.content,
                 user_id: $rootScope.my_id,
@@ -207,12 +223,16 @@ angular.module('ChatroomCtrl', ['CookieService']).controller('ChatroomController
             $http.post('/api/messages', messageJSON).then(function(res) {
                 var date = new Date();
                 var unixTime = date.getTime();
+                console.log('posted this:');
+                console.log(res.data.message._id);
                 var msgObj = {
                     username: $rootScope.my_username,
                     avatar_url: $rootScope.my_avatar_url,
                     content: message,
-                    time: unixTime
+                    time: unixTime,
+                    msg_id: res.data.message._id
                 };
+
                 $('.message-form > .send-message').val('');
                 socket.emit('chat message', msgObj, courseId);
             });
@@ -221,32 +241,27 @@ angular.module('ChatroomCtrl', ['CookieService']).controller('ChatroomController
         socket.emit('add-user', courseId);
 
         socket.on('chat message', function(msgObj){
-            console.log('got chat message heh');
-            var username = msgObj.username;
-            var avatar_url = msgObj.avatar_url;
-            var message = msgObj.content;
-            var time = unixTimeToText(msgObj.time);
-            $('.chat-box > .new-messages-container').append('\
-            <div class="message clearfix">\
-            <div class="message-avatar">\
-            <img src=' + avatar_url + '>\
-            </div>\
-            <div class="message-content">\
-            <div class="message-header">\
-            <div class="username">' + username + '</div>\
-            <div class="time">' + time + '</div>\
-            </div>\
-            <div class="message-text">' + message + '</div>\
-            </div>\
-            <div class="upvote">\
-            <i class="fa fa-heart"></i>\
-            <div class="score">0</div>\
-            </div>\
-            </div>\
-            ');
-            var $chatBox = $('.chat-box');
-            $chatBox.scrollTop($chatBox[0].scrollHeight);
+            var message = {
+                _id: msgObj.msg_id,
+                user_id: {
+                    avatar_url: msgObj.avatar_url,
+                    username: msgObj.username
+                },
+                created_at: msgObj.time,
+                content: msgObj.content,
+                score: 0
+            }
+
+            $scope.message = message;
+
+            $('.chat-box > .messages-container').append($compile('<chat-msg message="message"></chat-msg>')($scope));
+            $scope.$apply();
+
+            // var $chatBox = $('.chat-box');
+            // $chatBox.scrollTop($chatBox[0].scrollHeight);
         });
+
+
 
         // converts unix timestamp to text
         function unixTimeToText(unix_timestamp) {

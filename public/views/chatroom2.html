@@ -1,7 +1,7 @@
 <div class="chatroom-container">
 
-
     <div class="left sidebar">
+
         <div class="stuckbar logo" ng-click="largeCourseView=false">
             <img src="img/logo2.png"> Trofir
         </div>
@@ -51,17 +51,16 @@
 
     </div>
 
-    <div class="right sidebar" ng-click="largeCourseView=false" >
+    <!-- <div class="right sidebar" ng-click="largeCourseView=false" >
 
         <i class="fa fa-line-chart"></i>
-        <!-- <i class="fa fa-files-o"></i> -->
 
         <ul class="top-content">
             <li class="top-post" ng-repeat="topPost in topPosts" ng-include src="'./views/partials/top-post.html'">
             </li>
         </ul>
 
-    </div>
+    </div> -->
 
     <div class="course-header" ng-click="largeCourseView=false" >
         {{ course.name }}
@@ -69,14 +68,8 @@
 
     <div class="chat-box" ng-click="largeCourseView=false" scroll-glue>
 
-        <div class="existing-messages-container">
-            <div class="message clearfix" ng-repeat="message in allMessages"
-            data-id="{{ message._id }}"
-            ng-include src="'./views/partials/chat-message.html'">
-            </div>
-        </div>
-
-        <div class="new-messages-container">
+        <div class="messages-container">
+            <chat-msg ng-repeat="message in allMessages" message="message"></chat-msg>
         </div>
 
         <ul class="users-typing">
@@ -92,3 +85,33 @@
         <input ng-model="messageData.content" type="text" class="send-message" name="send-message" placeholder="Send a message..." autocomplete="off">
     </form>
 </div>
+<!-- move into service later -->
+<script>
+function socketLikeMsg($this, m_id) {
+  var unlike = $($this).hasClass('selected');
+
+  var incAmt = 0;
+  // like post
+  if (!unlike) {
+      $rootScope.myLikes.push(m_id);
+      incAmt = 1;
+      $($this).addClass('selected');
+  }
+  // unlike post
+  else {
+      $rootScope.myLikes.splice($rootScope.myLikes.indexOf(m_id), 1);
+      incAmt = -1;
+      $($this).removeClass('selected');
+  }
+
+  $http.put('/api/users/' + $rootScope.my_id, { liked_message_ids: $rootScope.myLikes })
+  .then(function(res) {
+      console.log(res);
+  });
+
+  $http.put('/api/messages/' + m_id, { inc_amt: incAmt })
+  .then(function(res) {
+      console.log(res);
+  })
+}
+</script>

@@ -42,7 +42,8 @@ div, input {
     width: 150px;
     margin: 25px;
 }
-@media (max-width: 1020px) {
+/* change this to max-width: 1020px when we add the top content in */
+@media (max-width: 2020px) {
     .right.sidebar {
         display: none;
     }
