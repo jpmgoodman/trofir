@@ -252,13 +252,25 @@ angular.module('ChatroomCtrl', ['CookieService']).controller('ChatroomController
                 score: 0
             }
 
-            $scope.message = message;
+            // $scope.message = message;
+            //
+            // $('.chat-box > .messages-container').append($compile('<chat-msg message="message"></chat-msg>')($scope));
+            // $scope.$apply();
 
-            $('.chat-box > .messages-container').append($compile('<chat-msg message="message"></chat-msg>')($scope));
-            $scope.$apply();
+            $('.chat-box > .messages-container').append('\
+            <div class="message clearfix" data-id=' + message._id +'>\
+            <div class="message-avatar">\
+                <img src=' + message.user_id.avatar_url +'>\
+            </div>\
+            <div class="message-content">\
+                <div class="message-header">\
+                    <div class="username">' + message.user_id.username + '</div>\
+                    <div class="time">' + unixTimeToText(message.created_at) + '</div>\
+                </div>\
+                <div class="message-text">' + message.content +'</div>\
+            </div>\
+            </div>');
 
-            // var $chatBox = $('.chat-box');
-            // $chatBox.scrollTop($chatBox[0].scrollHeight);
         });
 
 
