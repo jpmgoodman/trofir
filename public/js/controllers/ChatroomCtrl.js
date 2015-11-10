@@ -180,6 +180,8 @@ angular.module('ChatroomCtrl', ['CookieService']).controller('ChatroomController
             clearTimeout(timeout);
             timeoutFunction();
 
+            $('.message-form > .send-message').val('');
+
             $('.chat-box > .messages-container').append('\
             <div class="message clearfix">\
             <div class="message-avatar">\
@@ -233,7 +235,6 @@ angular.module('ChatroomCtrl', ['CookieService']).controller('ChatroomController
                     msg_id: res.data.message._id
                 };
 
-                $('.message-form > .send-message').val('');
                 socket.emit('chat message', msgObj, courseId);
             });
         };
@@ -270,6 +271,9 @@ angular.module('ChatroomCtrl', ['CookieService']).controller('ChatroomController
                 <div class="message-text">' + message.content +'</div>\
             </div>\
             </div>');
+
+            var $chatBox = $('.chat-box');
+            $chatBox.scrollTop($chatBox[0].scrollHeight);
 
         });
 
