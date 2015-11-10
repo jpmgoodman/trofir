@@ -12,11 +12,39 @@
 }
 .splash-logo {
 	z-index: 10; position: absolute; width: 100%;
-	top: 15%;  left: 0;
+	top: 10px;  left: 0;
 	text-align: center; color: white; font-family: 'Open Sans', sans-serif;
 }
 .splash-logo > img {
 	height: 300px;
+}
+.get-started {
+	position: absolute;
+	width: 400px;
+	left: 50%;
+	margin-left:-200px;
+	line-height: 80px;
+	bottom: 0px;
+	border-radius: 5px;
+}
+.get-started > a:hover {
+	background: rgba(135, 183, 42, 1);
+	color: #0C3F46;
+}
+.get-started > a {
+	display: block;
+	height: 100%;
+	width: 100%;
+	cursor: pointer;
+	color: inherit;
+	background: #0C3F46;
+	color: rgba(135, 183, 42, 1);
+	font-size: 1.2em;
+	font-weight: bold;
+	border-radius: 5px;
+}
+a:hover, a:visited, a:focus {
+	color:inherit;
 }
 </style>
 
@@ -24,4 +52,9 @@
 <div class="cover-photo"></div>
 <div class="splash-logo">
 	<img src="img/splash-logo.png" style="height: 500px">
+	<div class="get-started">
+		<a href="#/princeton/56425ed65a66b7c228f34c2d">
+			Bring me to a random COS course!
+		</a>
+	</div>
 </div>
