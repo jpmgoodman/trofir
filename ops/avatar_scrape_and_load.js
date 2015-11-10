@@ -40,5 +40,5 @@ function saveToMongo(imageURL) {
         url: imageURL
     }
 
-    request.post('http://localhost:8080/api/avatars').form(formData);
+    request.post('http://trofir.com/api/avatars').form(formData);
 }
