@@ -9,7 +9,7 @@ var cosURL = "https://registrar.princeton.edu/course-offerings/search_results.xm
 var astURL = "https://registrar.princeton.edu/course-offerings/search_results.xml?term=1162&subject=AST"
 
 
-request(astURL, function (err, res, html) {
+request(cosURL, function (err, res, html) {
     if (!err && res.statusCode == 200) {
         var princeton_courses = [];
         var $ = cheerio.load(html);
@@ -24,40 +24,52 @@ request(astURL, function (err, res, html) {
 });
 
 function getCourseInfo($, $tr) {
-    code = $($tr.children()[0]).text().replace(/\s\s+|\n/g, ' ').trim();
-    name_tech = $($tr.children()[1]).text().replace(/\s\s+|\n/g, ' ').trim();
-    name = $($tr.children()[2]).text().replace(/\s\s+|\n/g, ' ').trim();
-    distr_area = $($tr.children()[3]).text().replace(/\s\s+|\n/g, ' ').trim();
-    course_sect = $($tr.children()[4]).text().replace(/\s\s+|\n/g, ' ').trim();
-    time_days = $($tr.children()[5]).text().replace(/\s\s+|\n/g, ' ').trim();
-    time_hours = $($tr.children()[6]).text().replace(/\s\s+|\n/g, ' ').trim();
-    num_enrl = $($tr.children()[8]).text().replace(/\s\s+|\n/g, ' ').trim();
-    status = $($tr.children()[10]).text().replace(/\s\s+|\n/g, ' ').trim();
-    courseUrl = $($tr.children()[1]).children('a').attr('href');
+    name = 'name';
+    while (name.length > 0) {
 
-    if (status == 'Canceled' || num_enrl < 10) {
-        getCourseInfo($, $tr.next('tr'));
+        code = $($tr.children()[0]).text().replace(/\s\s+|\n/g, ' ').trim();
+        name_tech = $($tr.children()[1]).text().replace(/\s\s+|\n/g, ' ').trim();
+        name = $($tr.children()[2]).text().replace(/\s\s+|\n/g, ' ').trim();
+        distr_area = $($tr.children()[3]).text().replace(/\s\s+|\n/g, ' ').trim();
+        course_sect = $($tr.children()[4]).text().replace(/\s\s+|\n/g, ' ').trim();
+        time_days = $($tr.children()[5]).text().replace(/\s\s+|\n/g, ' ').trim();
+        time_hours = $($tr.children()[6]).text().replace(/\s\s+|\n/g, ' ').trim();
+        num_enrl = $($tr.children()[8]).text().replace(/\s\s+|\n/g, ' ').trim();
+        status = $($tr.children()[10]).text().replace(/\s\s+|\n/g, ' ').trim();
+        courseUrl = $($tr.children()[1]).children('a').attr('href');
+
+        $tr = $tr.next('tr');
+
+        if (status != 'Canceled' && num_enrl >= 10) {
+            var prof = "";
+            var description = "";
+            var course = [school, code, name, name_tech, description, time_hours, time_days, prof, distr_area, course_sect];
+            saveToCatalog(course);
+        }
     }
-    else {
-        request('https://registrar.princeton.edu/course-offerings/' + courseUrl, function(err, res, html) {
-            if (!err && res.statusCode == 200) {
-                var $ = cheerio.load(html);
-                var name = $('#timetable').children('h2').first().text().replace(/\s\s+|\n/g, ' ').trim();
-                var prof = $('#timetable').children('p').first().text().replace(/\s\s+|\n/g, ' ').trim();
-                var description = $('#descr').first().text().replace(/\s\s+|\n/g, ' ').trim();
-                var course = [school, code, name, name_tech, description, time_hours, time_days, prof, distr_area, course_sect];
-            }
-            else {
-                console.log('could not crawl to course page');
-                var prof = "";
-                var description = "";
-                var course = [school, code, name, name_tech, description, time_hours, time_days, prof, distr_area, course_sect];
-            }
-            // saveToCatalog(course);
-            console.log('onto the next one...');
-            getCourseInfo($, $tr.next('tr'));
-        });
-    }
+
+
+    // else {
+    //     request('https://registrar.princeton.edu/course-offerings/' + courseUrl, function(err, res, html) {
+    //         if (!err && res.statusCode == 200) {
+    //             var $ = cheerio.load(html);
+    //             var name = $('#timetable').children('h2').first().text().replace(/\s\s+|\n/g, ' ').trim();
+    //             var prof = $('#timetable').children('p').first().text().replace(/\s\s+|\n/g, ' ').trim();
+    //             var description = $('#descr').first().text().replace(/\s\s+|\n/g, ' ').trim();
+    //             var course = [school, code, name, name_tech, description, time_hours, time_days, prof, distr_area, course_sect];
+    //         }
+    //         else {
+    //             console.log('could not crawl to course page');
+    //             var prof = "";
+    //             var description = "";
+    //             var course = [school, code, name, name_tech, description, time_hours, time_days, prof, distr_area, course_sect];
+    //         }
+    //         // saveToCatalog(course);
+    //         console.log('onto the next one...');
+    //         getCourseInfo($, $tr.next('tr'));
+    //     });
+    // }
+
 }
 
 function saveToCatalog(course) {
