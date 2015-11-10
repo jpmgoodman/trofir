@@ -86,5 +86,5 @@ function saveToCatalog(course) {
         course_sect: course[9]
     }
 
-    request.post('http://localhost:8080/api/courses').form(formData);
+    request.post('http://trofir.com/api/courses').form(formData);
 }
