@@ -242,6 +242,24 @@ angular.module('ChatroomCtrl', ['CookieService']).controller('ChatroomController
         socket.emit('add-user', courseId);
 
         socket.on('chat message', function(msgObj){
+
+            // fb style tab notifications of new messages
+            if (document.hidden) {
+                document.title = "New message";
+                var short = true;
+                var interval = window.setInterval(function() {
+                    document.title = short ? "(1) Trofir" : "New message";
+                    short = !short;
+
+                    if (!document.hidden) {
+                        document.title = "Trofir";
+                        window.clearInterval(interval);
+                    }
+
+                }, 3000);
+            }
+
+
             var message = {
                 _id: msgObj.msg_id,
                 user_id: {
